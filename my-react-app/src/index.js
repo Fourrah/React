@@ -184,6 +184,26 @@ function Garage3(props) {
 }
 const cars3 = ['Truck', 'Bus', 'Taxi', 'Aude'];
 
+function Cars(props) {
+  return <li>I am a {props.brand}</li>
+}
+
+function Garage4() {
+  const cars = [
+    {id: 1, brand: 'Ford'},
+    {id: 2, brand: 'BMW'},
+    {id: 3, brand: 'Audi'}
+  ];
+  return (
+    <>
+      <h1>who lives in Garage???</h1>
+      <ul>
+        {cars.map((car) => <Cars key={car.id} brand={car.brand} />)}
+      </ul>
+    </>
+  )
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
@@ -203,3 +223,4 @@ root.render(<Garage2 />);
 root.render(<Football />);
 root.render(<Goal isGoal={false} />);
 root.render(<Garage3 cars2={cars3} />);
+root.render(<Garage4 />);
