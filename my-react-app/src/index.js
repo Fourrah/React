@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 import Car2 from './car.js';
 
 const myArray = ['apple', 'banana', 'orange'];
@@ -204,6 +205,61 @@ function Garage4() {
   )
 }
 
+function MyForm() {
+  const [inputs, setInputs] =useState("");
+
+  const handleChange = (event) =>{
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+    alert(inputs);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Enter your name:
+        <input 
+          type="text"
+          name='username'
+          value={inputs.username || ""}
+          onChange={handleChange}
+        />
+      </label>
+      <label>Enter your age:
+        <input 
+          type="number"
+          name='age'
+          value={inputs.age || ""}
+          onChange={handleChange}
+        />
+      </label>
+      <input type='submit'/>
+    </form>
+  )
+}
+
+function MyForm2() {
+  const [myCar, setMyCar] = useState("Ford"); //맨 처음 고정값으로 Ford를 보여줌
+
+  const handleChange = (event) => {
+    setMyCar(event.target.value)
+  }
+
+  return (
+    <form>
+      <select value={myCar} onChange={handleChange}>
+        <option value="Ford">Ford</option>
+        <option value="Volvo">Volvo</option>
+        <option value="Fiat">Fiat</option>
+      </select>
+    </form>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
@@ -224,3 +280,5 @@ root.render(<Football />);
 root.render(<Goal isGoal={false} />);
 root.render(<Garage3 cars2={cars3} />);
 root.render(<Garage4 />);
+root.render(<MyForm />);
+root.render(<MyForm2 />);
