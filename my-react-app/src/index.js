@@ -147,6 +147,14 @@ function Garage2() {
   )
 }
 
+function Football() {
+  const shoot = (a, b) => {
+    alert(b.type);
+  }
+
+  return <button onClick={(event) => shoot("Goal!!!!", event)}>Take the shot!</button>
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
 root.render(myElement);
@@ -162,3 +170,4 @@ root.render(<Header />);
 root.render(<Header2 />);
 root.render(<Container />);
 root.render(<Garage2 />);
+root.render(<Football />);
