@@ -155,6 +155,36 @@ function Football() {
   return <button onClick={(event) => shoot("Goal!!!!", event)}>Take the shot!</button>
 }
 
+function MissedGoal() {
+  return <h1>Missed!!!</h1>;
+}
+function MadeGoal() {
+  return <h1>Goal~~~~</h1>;
+}
+
+function Goal(props) {
+  const isGoal = props.isGoal;
+  return (
+    <>
+      {isGoal ? <MadeGoal /> : <MissedGoal />}
+    </>
+  )
+}
+
+function Garage3(props) {
+  const cars1 = props.cars2;
+  return (
+    <>
+      <h1>Garage</h1>
+      {cars1.length > 0 &&
+        <h2>you have {cars1.length} cars in your garage.</h2>
+      }
+    </>
+  )
+}
+const cars3 = ['Truck', 'Bus', 'Taxi', 'Aude'];
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
 root.render(myElement);
@@ -171,3 +201,5 @@ root.render(<Header2 />);
 root.render(<Container />);
 root.render(<Garage2 />);
 root.render(<Football />);
+root.render(<Goal isGoal={false} />);
+root.render(<Garage3 cars2={cars3} />);
