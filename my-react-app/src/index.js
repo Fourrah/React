@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Car2 from './car.js';
 
 const myArray = ['apple', 'banana', 'orange'];
 
@@ -32,6 +33,16 @@ const myElement7 = <h1>{(x) < 10 ? "Hello" : "GoodBye"}</h1>;
 
 const myElement6 = <h1 className='myclass'>Haloddddd</h1>;
 
+function Car() {
+  return <h2>Hi, Im a Car!</h2>;
+}
+
+function Garage() {
+  return (
+    <><h1>Who lives in my Garage?</h1><Car /></>
+  )
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
 root.render(myElement);
@@ -41,3 +52,5 @@ root.render(myElement4);
 root.render(myElement5);
 root.render(myElement6);
 root.render(myElement7);
+root.render(<Garage />);
+root.render(<Car2 />);
