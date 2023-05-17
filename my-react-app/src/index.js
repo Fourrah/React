@@ -133,6 +133,19 @@ class Child extends React.Component {
   }
 }
 
+function Carr(props) {
+  return <h2>I am a {props.brand.model} !!!!</h2>;
+}
+
+function Garage2() {
+  const carName = {model: "Ford", name: "suv"}
+  return (
+    <>
+      <h1>who lives in my garage??</h1>
+      <Carr brand = {carName}/>
+    </>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
@@ -148,3 +161,4 @@ root.render(<Car2 />);
 root.render(<Header />);
 root.render(<Header2 />);
 root.render(<Container />);
+root.render(<Garage2 />);
