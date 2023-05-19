@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { useState } from 'react';
 import Car2 from './car.js';
@@ -261,6 +261,82 @@ function MyForm2() {
   )
 }
 
+function FavoriteColor() {
+  const [color, setColor] = useState("red");
+
+  return (
+    <>
+      <h1>my favorite color is {color}</h1>
+      <button type='button' onClick={() => setColor("blue")}>Click</button>
+    </>
+  )
+}
+
+function Me() {
+  const [name, setName] = useState("Sara");
+  const [hobby, setHobby] = useState("swimming");
+  const [birth, setBirth] = useState("1998");
+
+  return (
+    <>
+      <h1>Hello, My name is {name}</h1>
+      <p>my hobby is {hobby}</p>
+      <p>my birth is {birth}</p>
+    </>
+  )
+}
+
+function AboutMe() {
+  const [me, setMe] = useState({
+    name: "Sara",
+    hobby: "swimming",
+    birth: "1998"
+  });
+
+  const updateHobby = () => {
+    setMe(previousState => {
+      return {...previousState, hobby: "studying"}
+    });
+  }
+  return (
+    <>
+      <h1>Hi, My name is {me.name}</h1>
+      <p>my hobby is {me.hobby}</p>
+      <p>my birth is {me.birth}</p>
+      <button type='button' onClick={updateHobby}>click</button>
+    </>
+  )
+}
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000)
+  }, []);
+
+  return <h1>I've rendered {count} times!</h1>
+}
+
+function Timer2() {
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
+
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]);
+
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c+ 1)}>+</button>
+      <p>Calculation: {calculation}</p>
+    </>
+  )
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(myList);
 root.render(myElement);
@@ -282,3 +358,7 @@ root.render(<Garage3 cars2={cars3} />);
 root.render(<Garage4 />);
 root.render(<MyForm />);
 root.render(<MyForm2 />);
+root.render(<FavoriteColor />);
+root.render(<AboutMe />);
+root.render(<Timer />);
+root.render(<Timer2 />);
