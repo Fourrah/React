@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { useState, createContext, useContext } from 'react';
-import Car2 from './car.js';
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom/client";
+import { useState, createContext, useContext, useRef, useReducer } from "react";
+import Car2 from "./car.js";
 
-const myArray = ['apple', 'banana', 'orange'];
+const myArray = ["apple", "banana", "orange"];
 
-const myList = myArray.map((item) => <p>{item}</p>)
+const myList = myArray.map((item) => <p>{item}</p>);
 
-const myElement = <h1>I love JSX!</h1> //JSX 사용할 때
-const myElement3 = <h1>React is {5+5} times better with JSX</h1> //JSX 사용할 때
+const myElement = <h1>I love JSX!</h1>; //JSX 사용할 때
+const myElement3 = <h1>React is {5 + 5} times better with JSX</h1>; //JSX 사용할 때
 
-const myElement2 = React.createElement('h1', {}, 'I do not use JSX!'); //JSX 사용 안할때
+const myElement2 = React.createElement("h1", {}, "I do not use JSX!"); //JSX 사용 안할때
 
 const myElement4 = (
   <ul>
@@ -24,15 +24,14 @@ const myElement5 = (
   <>
     <p>I am a paragraph.</p>
     <p>I am a paragraph too.</p>
-
   </>
 );
 
 const x = 1;
 
-const myElement7 = <h1>{(x) < 10 ? "Hello" : "GoodBye"}</h1>;
+const myElement7 = <h1>{x < 10 ? "Hello" : "GoodBye"}</h1>;
 
-const myElement6 = <h1 className='myclass'>Haloddddd</h1>;
+const myElement6 = <h1 className="myclass">Haloddddd</h1>;
 
 function Car() {
   return <h2>Hi, Im a Car!</h2>;
@@ -40,26 +39,31 @@ function Car() {
 
 function Garage() {
   return (
-    <><h1>Who lives in my Garage?</h1><Car /></>
-  )
+    <>
+      <h1>Who lives in my Garage?</h1>
+      <Car />
+    </>
+  );
 }
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {favoritecolor: "red"};
+    this.state = { favoritecolor: "red" };
   }
   shouldComponentUpdate() {
     return true; //true일 때만 렌더링 됨!
   }
   changeColor = () => {
-    this.setState({favoritecolor: "blue"});
-  }
+    this.setState({ favoritecolor: "blue" });
+  };
   render() {
     return (
       <div>
-      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
-      <button type="button" onClick={this.changeColor}>Change color</button>
+        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+        <button type="button" onClick={this.changeColor}>
+          Change color
+        </button>
       </div>
     );
   }
@@ -68,56 +72,57 @@ class Header extends React.Component {
 class Header2 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {favoritecolor: "red"};
+    this.state = { favoritecolor: "red" };
   }
 
   //마운트 된 직후에 호출
   componentDidMount() {
     setTimeout(() => {
-      this.setState({favoritecolor: "yellow"})
-    }, 1000)
+      this.setState({ favoritecolor: "yellow" });
+    }, 1000);
   }
-  
+
   //업데이트 되기 전 값을 알려줌
   getSnapshotBeforeUpdate(prevProps, prevState) {
     document.getElementById("div1").innerHTML =
-    "Before the update, the favorite was " + prevState.favoritecolor;
+      "Before the update, the favorite was " + prevState.favoritecolor;
   }
 
   //업데이트 된 후의 값도 알려줌
   componentDidUpdate() {
     document.getElementById("div2").innerHTML =
-    "The updated favorite is " + this.state.favoritecolor;
+      "The updated favorite is " + this.state.favoritecolor;
   }
   render() {
     return (
       <div>
-      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
-      <div id="div1"></div>
-      <div id="div2"></div>
+        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+        <div id="div1"></div>
+        <div id="div2"></div>
       </div>
     );
   }
 }
 
-
 class Container extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {show: true};
+    this.state = { show: true };
   }
   delHeader = () => {
-    this.setState({show: false});
-  }
+    this.setState({ show: false });
+  };
   render() {
     let myheader;
     if (this.state.show) {
       myheader = <Child />;
-    };
+    }
     return (
       <div>
-      {myheader}
-      <button type="button" onClick={this.delHeader}>Delete Header</button>
+        {myheader}
+        <button type="button" onClick={this.delHeader}>
+          Delete Header
+        </button>
       </div>
     );
   }
@@ -128,9 +133,7 @@ class Child extends React.Component {
     alert("The component named Header is about to be unmounted.");
   }
   render() {
-    return (
-      <h1>Hello World!</h1>
-    );
+    return <h1>Hello World!</h1>;
   }
 }
 
@@ -139,21 +142,25 @@ function Carr(props) {
 }
 
 function Garage2() {
-  const carName = {model: "Ford", name: "suv"}
+  const carName = { model: "Ford", name: "suv" };
   return (
     <>
       <h1>who lives in my garage??</h1>
-      <Carr brand = {carName}/>
+      <Carr brand={carName} />
     </>
-  )
+  );
 }
 
 function Football() {
   const shoot = (a, b) => {
     alert(b.type);
-  }
+  };
 
-  return <button onClick={(event) => shoot("Goal!!!!", event)}>Take the shot!</button>
+  return (
+    <button onClick={(event) => shoot("Goal!!!!", event)}>
+      Take the shot!
+    </button>
+  );
 }
 
 function MissedGoal() {
@@ -165,11 +172,7 @@ function MadeGoal() {
 
 function Goal(props) {
   const isGoal = props.isGoal;
-  return (
-    <>
-      {isGoal ? <MadeGoal /> : <MissedGoal />}
-    </>
-  )
+  return <>{isGoal ? <MadeGoal /> : <MissedGoal />}</>;
 }
 
 function Garage3(props) {
@@ -177,78 +180,82 @@ function Garage3(props) {
   return (
     <>
       <h1>Garage</h1>
-      {cars1.length > 0 &&
+      {cars1.length > 0 && (
         <h2>you have {cars1.length} cars in your garage.</h2>
-      }
+      )}
     </>
-  )
+  );
 }
-const cars3 = ['Truck', 'Bus', 'Taxi', 'Aude'];
+const cars3 = ["Truck", "Bus", "Taxi", "Aude"];
 
 function Cars(props) {
-  return <li>I am a {props.brand}</li>
+  return <li>I am a {props.brand}</li>;
 }
 
 function Garage4() {
   const cars = [
-    {id: 1, brand: 'Ford'},
-    {id: 2, brand: 'BMW'},
-    {id: 3, brand: 'Audi'}
+    { id: 1, brand: "Ford" },
+    { id: 2, brand: "BMW" },
+    { id: 3, brand: "Audi" },
   ];
   return (
     <>
       <h1>who lives in Garage???</h1>
       <ul>
-        {cars.map((car) => <Cars key={car.id} brand={car.brand} />)}
+        {cars.map((car) => (
+          <Cars key={car.id} brand={car.brand} />
+        ))}
       </ul>
     </>
-  )
+  );
 }
 
 function MyForm() {
-  const [inputs, setInputs] =useState("");
+  const [inputs, setInputs] = useState("");
 
-  const handleChange = (event) =>{
+  const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
-  }
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
     alert(inputs);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Enter your name:
-        <input 
+      <label>
+        Enter your name:
+        <input
           type="text"
-          name='username'
+          name="username"
           value={inputs.username || ""}
           onChange={handleChange}
         />
       </label>
-      <label>Enter your age:
-        <input 
+      <label>
+        Enter your age:
+        <input
           type="number"
-          name='age'
+          name="age"
           value={inputs.age || ""}
           onChange={handleChange}
         />
       </label>
-      <input type='submit'/>
+      <input type="submit" />
     </form>
-  )
+  );
 }
 
 function MyForm2() {
   const [myCar, setMyCar] = useState("Ford"); //맨 처음 고정값으로 Ford를 보여줌
 
   const handleChange = (event) => {
-    setMyCar(event.target.value)
-  }
+    setMyCar(event.target.value);
+  };
 
   return (
     <form>
@@ -258,7 +265,7 @@ function MyForm2() {
         <option value="Fiat">Fiat</option>
       </select>
     </form>
-  )
+  );
 }
 
 function FavoriteColor() {
@@ -267,9 +274,11 @@ function FavoriteColor() {
   return (
     <>
       <h1>my favorite color is {color}</h1>
-      <button type='button' onClick={() => setColor("blue")}>Click</button>
+      <button type="button" onClick={() => setColor("blue")}>
+        Click
+      </button>
     </>
-  )
+  );
 }
 
 function Me() {
@@ -283,29 +292,31 @@ function Me() {
       <p>my hobby is {hobby}</p>
       <p>my birth is {birth}</p>
     </>
-  )
+  );
 }
 
 function AboutMe() {
   const [me, setMe] = useState({
     name: "Sara",
     hobby: "swimming",
-    birth: "1998"
+    birth: "1998",
   });
 
   const updateHobby = () => {
-    setMe(previousState => {
-      return {...previousState, hobby: "studying"}
+    setMe((previousState) => {
+      return { ...previousState, hobby: "studying" };
     });
-  }
+  };
   return (
     <>
       <h1>Hi, My name is {me.name}</h1>
       <p>my hobby is {me.hobby}</p>
       <p>my birth is {me.birth}</p>
-      <button type='button' onClick={updateHobby}>click</button>
+      <button type="button" onClick={updateHobby}>
+        click
+      </button>
     </>
-  )
+  );
 }
 
 function Timer() {
@@ -314,10 +325,10 @@ function Timer() {
   useEffect(() => {
     setTimeout(() => {
       setCount((count) => count + 1);
-    }, 1000)
+    }, 1000);
   }, []);
 
-  return <h1>I've rendered {count} times!</h1>
+  return <h1>I've rendered {count} times!</h1>;
 }
 
 function Timer2() {
@@ -331,10 +342,10 @@ function Timer2() {
   return (
     <>
       <p>Count: {count}</p>
-      <button onClick={() => setCount((c) => c+ 1)}>+</button>
+      <button onClick={() => setCount((c) => c + 1)}>+</button>
       <p>Calculation: {calculation}</p>
     </>
-  )
+  );
 }
 
 const UserContext = createContext();
@@ -351,7 +362,7 @@ function Component1() {
 }
 
 function Component2() {
-  return(
+  return (
     <>
       <h1>Component 2</h1>
       <Component3 />
@@ -360,7 +371,7 @@ function Component2() {
 }
 
 function Component3() {
-  return(
+  return (
     <>
       <h1>Component 3</h1>
       <Component4 />
@@ -369,7 +380,7 @@ function Component3() {
 }
 
 function Component4() {
-  return(
+  return (
     <>
       <h1>Component 4</h1>
       <Component5 />
@@ -379,7 +390,7 @@ function Component4() {
 
 function Component5() {
   const user = useContext(UserContext);
-  return(
+  return (
     <>
       <h1>Component 5</h1>
       <h2>{`Hello ${user} again!`}</h2>
@@ -387,7 +398,80 @@ function Component5() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+function App() {
+  const [inputValue, setInputValue] = useState("");
+  const previousInputValue = useRef("");
+
+  useEffect(() => {
+    previousInputValue.current = inputValue;
+  }, [inputValue]);
+
+  return (
+    <>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <h2>Current Value: {inputValue}</h2>
+      <h2>Previous Value: {previousInputValue.current}</h2>
+    </>
+  );
+}
+
+const initialTodos = [
+  {
+    id: 1,
+    title: "Todo 1",
+    complete: false,
+  },
+  {
+    id: 2,
+    title: "Todo 2",
+    complete: false,
+  },
+];
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "COMPLETE":
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: !todo.complete };
+        } else {
+          return todo;
+        }
+      });
+    default:
+      return state;
+  }
+};
+
+function Todos() {
+  const [todos, dispatch] = useReducer(reducer, initialTodos);
+
+  const handleComplete = (todo) => {
+    dispatch({ type: "COMPLETE", id: todo.id });
+  };
+  return (
+    <>
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleComplete(todo)}
+            />
+            {todo.title}
+          </label>
+        </div>
+      ))}
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(myList);
 root.render(myElement);
 root.render(myElement2);
@@ -413,3 +497,5 @@ root.render(<AboutMe />);
 root.render(<Timer />);
 root.render(<Timer2 />);
 root.render(<Component1 />);
+root.render(<App />);
+root.render(<Todos />);
