@@ -3,32 +3,43 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     //함수형 컴포넌트
-    function Btn(props) {
+    function Btn({text, onClick, fontSize=20}) {
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
+            fontSize,
           }}
         >
-          {props.text}
+          {text}
         </button>
       );
     }
+    const MemorizedBtn = React.memo(Btn);
+    MemorizedBtn.propTypes={
+      text:PropTypes.string.isRequired,
+      fontSize:PropTypes.number,
+    };
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes")
       return (
         //JSX의 내부
         <div>
-            <Btn text="Save Changes"/>
-            <Btn text="Confirm"/>
+            <Btn MemorizedBtn text={value} onClick={changeValue}/>
+            <Btn MemorizedBtn text="Confirm"/>
+            <Btn MemorizedBtn text="Prop Types" fontSize={40}/>
         </div>
       );
     }
