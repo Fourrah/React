@@ -7,6 +7,7 @@ function App4() {
     <Routes>
       <Route path="/movie" element={<Detail />} />
       <Route path="/" element={<Home />} />
+      <Route path="/moive/:id" element={<Detail />} />
     </Routes>
   </Router>
 }
