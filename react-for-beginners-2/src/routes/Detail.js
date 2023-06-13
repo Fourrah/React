@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./Home.module.css";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState([]);
   const { id } = useParams();
   const getMovieDetail = async () => {
     const json = await (
@@ -16,9 +17,15 @@ function Detail() {
     getMovieDetail();
   }, []);
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Detail</h1>
-      {loading ? <h1>Loading...</h1> : <h2>{details.title_long}</h2>}
+      {loading ? (
+        <div className={styles.loader}>Loading...</div>
+      ) : (
+        <div className={styles.details}>
+            {<h2>{details.title_long}</h2>}
+        </div>
+      )}
     </div>
   );
 }
